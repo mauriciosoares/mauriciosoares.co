@@ -16,7 +16,10 @@ module.exports = function(grunt) {
   // watch
   config.watch = {};
   config.watch.scripts = {
-    files: ['dev/js/**/*.js'],
+    files: [
+      'dev/assets/js/**/*.js',
+      '!dev/assets/js/main.js'
+    ],
     tasks: ['jshint', 'concat']
   };
 
@@ -26,14 +29,14 @@ module.exports = function(grunt) {
   config.jshint.options = {
     debug: true
   };
-  config.jshint.all = ['dev/js/**/*.js'];
+  config.jshint.all = ['dev/assets/js/**/*.js'];
 
   // =============================================
   // uglify
   config.uglify = {
     dist: {
       files: {
-        'dist/assets/js/all.min.js': ['dev/js/libs/*.js', 'dev/js/main.js']
+        'dist/assets/js/all.min.js': ['dev/assets/js/libs/*.js', 'dev/assets/js/main.js']
       }
     }
   };
@@ -43,10 +46,10 @@ module.exports = function(grunt) {
   config.concat = {
     dist: {
       src: [
-        'dev/js/app.js',
-        'dev/js/**/*.js'
+        'dev/assets/js/**/*.js',
+        '!dev/assets/js/main.js'
       ],
-      dest: 'dev/js/main.js'
+      dest: 'dev/assets/js/main.js'
     }
   };
 
@@ -67,5 +70,5 @@ module.exports = function(grunt) {
   tasks.forEach(grunt.loadNpmTasks);
 
   grunt.registerTask('dev', ['connect', 'watch']);
-  grunt.registerTask('dist', ['compass:dist', 'uglify']);
+  grunt.registerTask('dist', ['uglify']);
 };
