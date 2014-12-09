@@ -29,7 +29,7 @@ module.exports = function(grunt) {
   config.jshint.options = {
     debug: true
   };
-  config.jshint.all = ['dev/assets/js/**/*.js'];
+  config.jshint.all = ['dev/assets/js/**/*.js', '!dev/assets/js/libs/*.js', '!dev/assets/js/main.js'];
 
   // =============================================
   // uglify
@@ -46,6 +46,7 @@ module.exports = function(grunt) {
   config.concat = {
     dist: {
       src: [
+        'dev/assets/js/libs/*.js',
         'dev/assets/js/**/*.js',
         '!dev/assets/js/main.js'
       ],
