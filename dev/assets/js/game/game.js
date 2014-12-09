@@ -5,10 +5,14 @@ var GameState = function() {
 GameState.prototype.preload = function() {
   this.game.load.spritesheet('ship', 'assets/images/ship.png', 50, 47);
   this.game.load.image('bullet', 'assets/images/bullet.png');
+  this.game.load.image('asteroid_projects', 'assets/images/asteroids/projects.png');
 };
 
 GameState.prototype.create = function() {
   this.game.stage.backgroundColor = 0x000000;
+
+  // first asteroid config
+  this.projects = this.game.add.sprite(20, 20, 'asteroid_projects');
 
   // setting ship constants
   this.ACCELERATION = 200;
@@ -16,7 +20,7 @@ GameState.prototype.create = function() {
   this.DRAG = 50;
   this.ROTATION_SPEED = 180;
 
-  this.ship = this.game.add.sprite(200, 200, 'ship');
+  this.ship = this.game.add.sprite(window.innerWidth / 2, window.innerHeight / 2, 'ship');
   this.ship.anchor.setTo(0.5, 0.5);
 
   this.game.physics.enable(this.ship, Phaser.Physics.ARCADE);
